@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(middlewares.errorHandler);
 
-const { ProductsController, SalesController } = require('./controllers/index');
+const { GetProducts, GetSales, PostProducts } = require('./controllers/index');
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
@@ -15,13 +15,13 @@ app.get('/', (_request, response) => {
 });
 /// /////////////////////////////////////////////////////////////
 
-app.get('/products', ProductsController.getAll);
-app.get('/products/:id', ProductsController.getById);
+app.get('/products', GetProducts.getAll);
+app.get('/products/:id', GetProducts.getById);
 
-app.get('/sales', SalesController.getAll);
-app.get('/sales/:id', SalesController.getById);
+app.get('/sales', GetSales.getAll);
+app.get('/sales/:id', GetSales.getById);
 
-// app.post('/products', middlewares.validateProducts);
+app.post('/products', middlewares.validateProducts, PostProducts);
 // app.post('/sales', middlewares.validateSales);
 
 app.listen(process.env.PORT, () => {
