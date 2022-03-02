@@ -5,7 +5,7 @@ const getAll = async (_req, res, _next) => {
     const products = await productsModel.getAll();
     return res.status(200).json(products);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -16,7 +16,7 @@ const getById = async (req, res, _next) => {
     if (!product) return res.status(404).json({ message: 'Product not found' });
     return res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 

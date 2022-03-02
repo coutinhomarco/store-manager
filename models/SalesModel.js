@@ -1,12 +1,12 @@
 const connection = require('./connection');
-const serializer = require('../middlewares/serializeSales');
+const { serialize } = require('../middlewares/index');
 
 const getAll = async () => {
   const [sales] = await connection.execute(`SELECT sp.*  , s.date 
   FROM StoreManager.sales_products as sp 
   JOIN StoreManager.sales as s 
   ON s.id=sp.sale_id;`);
-  return serializer(sales);
+  return serialize(sales);
 };
 
 const getById = async (id) => {
@@ -16,7 +16,7 @@ const getById = async (id) => {
   JOIN StoreManager.sales as s 
   ON s.id=sp.sale_id 
   WHERE sp.sale_id = ?;`, [id]);
-  return serializer(sale);
+  return serialize(sale);
 };
 
 module.exports = {
