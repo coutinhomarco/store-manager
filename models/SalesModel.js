@@ -19,7 +19,28 @@ const getById = async (id) => {
   return serialize(sale);
 };
 
+const postSales = async (array) => {
+  await connection
+    .execute('INSERT INTO StoreManager.sales VALUES ()');
+  const [saleId] = await connection
+    .execute('SELECT MAX(id) as id FROM StoreManager.sales;');
+  const [{ id }] = saleId;
+  await array.map(async (sale) => {
+    await connection
+      .execute(`INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) 
+      VALUES (?,?,?);`, 
+    [id, sale.productId, sale.quantity]);
+  });
+  const returnArray = array.map((obj) => ({ productId: obj.productId, quantity: obj.quantity }));
+  const returnObject = { id,
+    itemsSold: returnArray };
+  return returnObject;
+};
+
 module.exports = {
   getAll,
   getById,
+  postSales,
 };
+
+//  const { id } = saleId;

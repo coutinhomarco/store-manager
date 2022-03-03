@@ -25,7 +25,7 @@ app.post('/products', middlewares.validateProducts, controllers.PostProducts);
 app.put('/products/:id', middlewares.validateProducts, controllers.ModifyProduct);
 app.delete('/products/:id', controllers.DeleteProduct);
 
-// app.post('/sales', middlewares.validateSales);
+app.post('/sales', middlewares.validateSales, controllers.PostSales);
 
 app.listen(process.env.PORT, () => {
   console.log(`Escutando na porta ${process.env.PORT}`);
