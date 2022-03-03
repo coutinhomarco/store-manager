@@ -19,8 +19,17 @@ const postProduct = async (name, quantity) => {
   return products;
 };
 
+const modifyProduct = async (name, quantity, id) => {
+  // if (!name || !quantity || id) return;
+  const products = await connection
+  .execute('UPDATE StoreManager.products SET name = ?, quantity = ? WHERE id = ?', 
+  [name, quantity, id]);
+  return products;
+};
+
 module.exports = {
   getAll,
   getById,
   postProduct,
+  modifyProduct,
 };
