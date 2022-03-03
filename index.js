@@ -22,7 +22,7 @@ app.get('/sales', GetSales.getAll);
 app.get('/sales/:id', GetSales.getById);
 
 app.post('/products', middlewares.validateProducts, PostProducts);
-app.post('/products/:id', middlewares.validateProducts, ModifyProduct);
+app.put('/products/:id', middlewares.validateProducts, ModifyProduct);
 
 // app.post('/sales', middlewares.validateSales);
 
