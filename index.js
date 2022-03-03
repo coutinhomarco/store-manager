@@ -15,17 +15,18 @@ app.get('/', (_request, response) => {
 });
 /// /////////////////////////////////////////////////////////////
 
-app.get('/products', controllers.GetProducts.getAll);
-app.get('/products/:id', controllers.GetProducts.getById);
+app.get('/products', controllers.Products.getAll);
+app.get('/products/:id', controllers.Products.getById);
 
-app.get('/sales', controllers.GetSales.getAll);
-app.get('/sales/:id', controllers.GetSales.getById);
+app.get('/sales', controllers.Sales.getAll);
+app.get('/sales/:id', controllers.Sales.getById);
 
-app.post('/products', middlewares.validateProducts, controllers.PostProducts);
-app.put('/products/:id', middlewares.validateProducts, controllers.ModifyProduct);
-app.delete('/products/:id', controllers.DeleteProduct);
+app.post('/products', middlewares.validateProducts, controllers.Products.PostProducts);
+app.put('/products/:id', middlewares.validateProducts, controllers.Products.ModifyProducts);
+app.delete('/products/:id', controllers.Products.DeleteProduct);
 
-app.post('/sales', middlewares.validateSales, controllers.PostSales);
+app.post('/sales', middlewares.validateSales, controllers.Sales.PostSales);
+app.put('/sales/:id', middlewares.validateSales, controllers.Sales.PutSales);
 
 app.listen(process.env.PORT, () => {
   console.log(`Escutando na porta ${process.env.PORT}`);

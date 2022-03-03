@@ -1,8 +1,9 @@
 const PostSales = require('./PostSales');
 const errorHandler = require('./errorHandler');
-const serialize = require('./serializeSales');
+const serialize = require('./serialize');
 const validateProducts = require('./validateProducts');
 const validateSales = require('./validateSales');
+const modifySale = require('./modifySale');
 
 module.exports = {
   errorHandler,
@@ -10,4 +11,5 @@ module.exports = {
   validateProducts,
   validateSales,
   PostSales,
+  modifySale,
 };

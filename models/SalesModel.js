@@ -1,12 +1,11 @@
 const connection = require('./connection');
-const { serialize } = require('../middlewares/index');
 
 const getAll = async () => {
   const [sales] = await connection.execute(`SELECT sp.*  , s.date 
   FROM StoreManager.sales_products as sp 
   JOIN StoreManager.sales as s 
   ON s.id=sp.sale_id;`);
-  return serialize(sales);
+  return sales;
 };
 
 const getById = async (id) => {
@@ -16,7 +15,7 @@ const getById = async (id) => {
   JOIN StoreManager.sales as s 
   ON s.id=sp.sale_id 
   WHERE sp.sale_id = ?;`, [id]);
-  return serialize(sale);
+  return sale;
 };
 
 const postSales = async (array) => {
@@ -34,8 +33,20 @@ const postSales = async (array) => {
   return id;
 };
 
+const modifySales = async (data, id) => {
+  try {
+    await connection
+    .execute(`UPDATE 
+    StoreManager.sales_products SET  product_id = ?, quantity = ? WHERE sale_id = ?`, 
+    [data.productId, data.quantity, id]);
+  } catch (error) {
+    return '';
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   postSales,
+  modifySales,
 };

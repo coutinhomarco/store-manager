@@ -1,4 +1,4 @@
-const serialize = (a) => a.map(({ date, quantity, product_id: productId, sale_id: saleId }) => {
+module.exports = (a) => (a.map(({ date, quantity, product_id: productId, sale_id: saleId }) => {
     if (!saleId) {
       return {
         date,
@@ -12,5 +12,4 @@ const serialize = (a) => a.map(({ date, quantity, product_id: productId, sale_id
       productId,
       quantity,
     };
-  });
-module.exports = serialize;
+  }));
