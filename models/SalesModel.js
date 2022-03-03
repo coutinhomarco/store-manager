@@ -31,10 +31,7 @@ const postSales = async (array) => {
       VALUES (?,?,?);`, 
     [id, sale.productId, sale.quantity]);
   });
-  const returnArray = array.map((obj) => ({ productId: obj.productId, quantity: obj.quantity }));
-  const returnObject = { id,
-    itemsSold: returnArray };
-  return returnObject;
+  return id;
 };
 
 module.exports = {
@@ -42,5 +39,3 @@ module.exports = {
   getById,
   postSales,
 };
-
-//  const { id } = saleId;
