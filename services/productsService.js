@@ -13,7 +13,7 @@ const getOne = async (id) => {
   try {
     const [product] = await productsModel.getById(id);
     if (!product) return { code: 404, data: { message: 'Product not found' } };
-    return { code: 404, data: product };
+    return { code: 200, data: product };
   } catch (error) {
     return { code: 500 };
   }
@@ -40,7 +40,7 @@ const modifyProduct = async (id, name, quantity) => {
       id: oldProduct.id, name, quantity,
     };
     await productsModel.modifyProduct(name, quantity, id);
-    return { code: 204, data: updatedProduct };
+    return { code: 200, data: updatedProduct };
   } catch (error) {
     return { code: 500 };
   }

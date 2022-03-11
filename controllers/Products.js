@@ -14,7 +14,7 @@ const ModifyProducts = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, quantity } = req.body;
-    const { code, data } = productsService.modifyProduct(id, name, quantity);
+    const { code, data } = await productsService.modifyProduct(id, name, quantity);
     return res.status(code).json(data);
   } catch (error) {
     next(error);
