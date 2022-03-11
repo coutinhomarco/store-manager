@@ -83,4 +83,42 @@ describe('Testa controller dos products', () => {
           expect(response.status.calledWith(Response.code)).to.be.true;
         })
     })
+    describe('Adicionar um produto', () => { 
+      describe('produto não existe no  banco de dados',  () => {
+  
+        const Response = { 
+          code: 201, 
+          data: {
+            id: 1,
+            name: 'JBL',
+            quantity: 666
+          } 
+        }
+  
+        beforeEach(() => {
+          request.body = {
+            id: 1,
+            name: 'JBL',
+            quantity: 666
+          }
+          sinon.stub(productsService, 'postProducts').resolves(Response);
+        });
+  
+        afterEach(() => {
+          productsService.postProducts.restore();
+        });
+  
+        it('Testa se o response status vem com o code', async () =>{
+          await productsController.PostProducts(request, response, next)
+  
+          expect(response.status.calledWith(Response.code)).to.be.true;
+        })
+  
+        it('Testa se o response status vem com o data', async () =>{
+          await productsController.PostProducts(request, response, next)
+  
+          expect(response.json.calledWith( Response.data)).to.be.true;
+        })
+      })
+    })
 })
