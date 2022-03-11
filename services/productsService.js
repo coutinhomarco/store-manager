@@ -42,7 +42,7 @@ const modifyProduct = async (id, name, quantity) => {
     await productsModel.modifyProduct(name, quantity, id);
     return { code: 200, data: updatedProduct };
   } catch (error) {
-    return { code: 500 };
+    return { code: 500, data: error.message };
   }
 };
 
