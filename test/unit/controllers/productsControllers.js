@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const productsService = require('../../../services/productsService');
+const productsService = require('../../../services/products.service');
 const productsController = require('../../../controllers/Products');
 
 describe('Testa controller dos products', () => {
