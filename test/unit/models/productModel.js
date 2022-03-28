@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const connection = require('../../../models/connection');
 const productModels = require('../../../models/ProductsModel');
 
-describe('Testa model', () => {
+describe('Testa model de produtos', () => {
   describe('Testa getAll vazio', () => {
     let products = [[]]
 

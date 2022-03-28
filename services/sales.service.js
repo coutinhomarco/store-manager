@@ -20,12 +20,12 @@ const getById = async (id) => {
 
 const deleteOne = async (id) => {
     try {
-      const data = await salesModel.getAll();
-      const teste = serialize(data);
+      const all = await salesModel.getAll();
+      const teste = serialize(all);
       const oldProduct = teste.find((product) => product.saleId === Number(id));
       if (!oldProduct) return { code: 404, data: { message: 'Sale not found' } };
-      await salesModel.deleteSale(id);
-      return { code: 204 };
+      const data = await salesModel.deleteSale(id);
+      return { code: 204, data };
     } catch (error) {
       return { code: 500 };
     }
