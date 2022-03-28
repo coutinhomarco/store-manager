@@ -40,9 +40,9 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 
 Para criar o banco de dados, copie todo o conteúdo do arquivo StoreManager.sql e
-cole no  workbench. Rode todas as query, assim o banco estará online localmente.
+cole no  DBeaver. Rode todas as query, assim o banco estará online localmente.
 Para utilizar o banco de dados na aplicação. Renomeio o arquivo .env.example para .env
-e troque as informações para as que foram criadas quando o MySQL foi configurado. O PORT deve permanecer 3000.
+e troque as informações para as os seus dados definidos quando o MySQL foi configurado. O PORT deve permanecer 3000.
 
 ###  Rodando a aplicação .
 
