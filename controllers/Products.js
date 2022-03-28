@@ -1,20 +1,20 @@
 const productsService = require('../services/products.service');
 
- const PostProducts = async (req, res, next) => {
+ const create = async (req, res, next) => {
   try {
     const { name, quantity } = req.body;
-    const { code, data } = await productsService.postProducts(name, quantity);
+    const { code, data } = await productsService.create(name, quantity);
     return res.status(code).json(data);
   } catch (error) {
     next(error);
   }
 };
 
-const ModifyProducts = async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, quantity } = req.body;
-    const { code, data } = await productsService.modifyProduct(id, name, quantity);
+    const { code, data } = await productsService.update(id, name, quantity);
     return res.status(code).json(data);
   } catch (error) {
     next(error);
@@ -33,27 +33,21 @@ const getAll = async (_req, res, next) => {
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { code, data } = await productsService.getOne(id);
+    const { code, data } = await productsService.getById(id);
     return res.status(code).json(data);
   } catch (error) {
     return next(error);
   }
 };
 
-const DeleteProduct = async (req, res, next) => {
+const exclude = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { data, code } = await productsService.deleteOne(id);
+    const { data, code } = await productsService.exclude(id);
     return res.status(code).json(data);
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { 
-  PostProducts,
-  ModifyProducts,
-  getAll, 
-  getById,
-  DeleteProduct,
-};
+module.exports = { create, update, getAll, getById, exclude };

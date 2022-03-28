@@ -9,7 +9,7 @@ const getAll = async () => {
   }
 };
 
-const getOne = async (id) => {
+const getById = async (id) => {
   try {
     const [product] = await productsModel.getById(id);
     if (!product) return { code: 404, data: { message: 'Product not found' } };
@@ -19,7 +19,7 @@ const getOne = async (id) => {
   }
 };
 
-const deleteOne = async (id) => {
+const exclude = async (id) => {
   try {
     const data = await productsModel.getAll();
     const oldProduct = data.find((product) => product.id === Number(id));
@@ -31,7 +31,7 @@ const deleteOne = async (id) => {
   }
 };
 
-const modifyProduct = async (id, name, quantity) => {
+const update = async (id, name, quantity) => {
   try {
     const data = await productsModel.getAll();
     const oldProduct = data.find((product) => product.id === Number(id));
@@ -46,7 +46,7 @@ const modifyProduct = async (id, name, quantity) => {
   }
 };
 
-const postProducts = async (name, quantity) => {
+const create = async (name, quantity) => {
   try {
     let product = await productsModel.getAll();
     const findSameName = product.find((obj) => obj.name === name);
@@ -59,4 +59,4 @@ const postProducts = async (name, quantity) => {
     return { code: 500 };
   }
 };
-module.exports = { getAll, getOne, deleteOne, modifyProduct, postProducts };
+module.exports = { getAll, getById, exclude, update, create };

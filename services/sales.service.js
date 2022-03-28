@@ -2,7 +2,7 @@ const postSalesHelper = require('../helpers/PostSales');
 const serialize = require('../helpers/serialize');
 const salesModel = require('../models/SalesModel');
 
-const postSales = async (sales) => {
+const create = async (sales) => {
     const returnValue = await postSalesHelper(sales);
     return { code: 200, data: returnValue };
 };
@@ -18,7 +18,7 @@ const getById = async (id) => {
     return { code: 200, data: sale };
 };
 
-const deleteOne = async (id) => {
+const exclude = async (id) => {
     try {
       const all = await salesModel.getAll();
       const teste = serialize(all);
@@ -31,4 +31,4 @@ const deleteOne = async (id) => {
     }
   };
 
-module.exports = { postSales, getAll, getById, deleteOne };
+module.exports = { exclude, getAll, getById, create };

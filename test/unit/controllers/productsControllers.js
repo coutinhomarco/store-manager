@@ -42,15 +42,15 @@ describe('Testa controller dos products', () => {
       const Response =  {
         code: 200,
         data: 
-          { id: 1, name: 'Martelo de Thor', quantity: 10 },
+          { id: 1, name: 'Martelo de Thor', quantity: 10 }, 
       }
         beforeEach(() => {
           request.params = {id: 1}
-          sinon.stub(productsService, 'getOne').resolves(Response);
+          sinon.stub(productsService, 'getById').resolves(Response);
         });
 
         afterEach(() => {
-          productsService.getOne.restore();
+          productsService.getById.restore();
         });
         it('Testa se o response status vem com o code', async () =>{
           await productsController.getById(request, response, next)
@@ -73,10 +73,10 @@ describe('Testa controller dos products', () => {
 
         beforeEach(() => {
           request.params = {id: 60}
-          sinon.stub(productsService, 'getOne').resolves(Response);
+          sinon.stub(productsService, 'getById').resolves(Response);
         });
         afterEach(() => {
-          productsService.getOne.restore();
+          productsService.getById.restore();
         });
         it('Testa se o response status vem com o code', async () =>{
           await productsController.getById(request, response, next)
@@ -101,21 +101,21 @@ describe('Testa controller dos products', () => {
             name: 'JBL',
             quantity: 666
           }
-          sinon.stub(productsService, 'postProducts').resolves(Response);
+          sinon.stub(productsService, 'create').resolves(Response);
         });
   
         afterEach(() => {
-          productsService.postProducts.restore();
+          productsService.create.restore();
         });
   
         it('Testa se o response status vem com o code', async () =>{
-          await productsController.PostProducts(request, response, next)
+          await productsController.create(request, response, next)
   
           expect(response.status.calledWith(Response.code)).to.be.true;
         })
   
         it('Testa se o response status vem com o data', async () =>{
-          await productsController.PostProducts(request, response, next)
+          await productsController.create(request, response, next)
   
           expect(response.json.calledWith( Response.data)).to.be.true;
         })

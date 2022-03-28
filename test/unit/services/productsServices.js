@@ -56,17 +56,17 @@ describe('Testa listagem de produtos', () => {
       productsModels.getById.restore();
       });
       it('Testa igualdade do retorno', async () => {
-        const result = await productsService.getOne();
+        const result = await productsService.getById();
   
         expect(result).to.be.deep.equal(servicesResponse)
       })
       it('Testa tipo do retorno', async () => {
-        const result = await productsService.getOne();
+        const result = await productsService.getById();
   
         expect(result).to.be.an('object')
       })
       it('testa chaves do retorno', async() => {
-        const result = await productsService.getOne();
+        const result = await productsService.getById();
         expect(result).to.have.property('code')
         expect(result).to.have.property('data')
       })
@@ -88,17 +88,17 @@ describe('Testa listagem de produtos', () => {
       productsModels.getById.restore();
       });
       it('Testa igualdade do retorno', async () => {
-        const result = await productsService.getOne();
+        const result = await productsService.getById();
   
         expect(result).to.be.deep.equal(servicesResponse)
       })
       it('Testa tipo do retorno', async () => {
-        const result = await productsService.getOne();
+        const result = await productsService.getById();
   
         expect(result).to.be.an('object')
       })
       it('testa chaves do retorno', async() => {
-        const result = await productsService.getOne();
+        const result = await productsService.getById();
         expect(result).to.have.property('code')
         expect(result).to.have.property('data')
       })
@@ -128,7 +128,7 @@ describe('Testa listagem de produtos', () => {
         productsModels.postProduct.restore();
       })
       it('testa chaves do retorno', async() => {
-        const data = await productsService.postProducts(product.name, product.quantity)
+        const data = await productsService.create(product.name, product.quantity)
         expect(data).to.have.property('code')
         expect(data).to.have.property('data')
       })
@@ -156,7 +156,7 @@ describe('Testa listagem de produtos', () => {
         productsModels.postProduct.restore();
       })
       it('testa igualdade do retorno', async() => {
-        const data = await productsService.postProducts(product.name, product.quantity)
+        const data = await productsService.create(product.name, product.quantity)
         expect(data).to.be.deep.equal(servicesResponse)
       })
     })
@@ -183,11 +183,11 @@ describe('Testa listagem de produtos', () => {
         productsModels.getAll.restore()
       })
       it('Testa igualdade do retorno', async () => {
-        const data= await productsService.modifyProduct(product.id, product.name, product.quantity)
+        const data= await productsService.update(product.id, product.name, product.quantity)
         expect(data).to.be.deep.equal(servicesResponse);
       })
       it('testa chaves do retorno', async() => {
-        const data= await productsService.modifyProduct(product.id, product.name, product.quantity)
+        const data= await productsService.update(product.id, product.name, product.quantity)
         expect(data).to.have.property('code')
         expect(data).to.have.property('data')
       })
@@ -218,11 +218,11 @@ describe('Testa listagem de produtos', () => {
         productsModels.getAll.restore()
       })
       it('Testa igualdade do retorno', async () => {
-        const modifyResponse = await productsService.modifyProduct(product.id, product.name, product.quantity)
+        const modifyResponse = await productsService.update(product.id, product.name, product.quantity)
         expect(modifyResponse).to.be.deep.equal(servicesResponse);
       })
       it('testa chaves do retorno', async() => {
-        const data = await productsService.modifyProduct(product.id, product.name, product.quantity)
+        const data = await productsService.update(product.id, product.name, product.quantity)
         expect(data).to.have.property('code')
         expect(data).to.have.property('data')
       })
@@ -256,11 +256,11 @@ describe('Testa listagem de produtos', () => {
       })
 
       it('Testa retorno', async () => {
-        const modelResponse = await productsService.deleteOne(product.id)
+        const modelResponse = await productsService.exclude(product.id)
         expect(modelResponse).to.be.deep.equal(servicesResponse);
       })
       it('testa chaves do retorno', async() => {
-        const data = await productsService.deleteOne(product.id)
+        const data = await productsService.exclude(product.id)
         expect(data).to.have.property('code')
         expect(data).to.have.property('data')
       })
@@ -283,11 +283,11 @@ describe('Testa listagem de produtos', () => {
         productsModels.getAll.restore();
       })
       it('Testa retorno', async () => {
-        const modelResponse = await productsService.deleteOne(product.id)
+        const modelResponse = await productsService.exclude(product.id)
         expect(modelResponse).to.be.deep.equal(servicesResponse);
       })
       it('testa chaves do retorno', async() => {
-        const data = await productsService.deleteOne(product.id)
+        const data = await productsService.exclude(product.id)
         expect(data).to.have.property('code')
         expect(data).to.have.property('data')
       })

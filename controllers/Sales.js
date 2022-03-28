@@ -2,10 +2,10 @@ const serialize = require('../helpers/serialize');
 const modifySale = require('../helpers/modifySale');
 const salesService = require('../services/sales.service');
 
-const PostSales = async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
     const sales = req.body;
-    const { code, data } = await salesService.postSales(sales);
+    const { code, data } = await salesService.create(sales);
     return res.status(code).json(data);
   } catch (error) {
     next(error);
@@ -31,7 +31,7 @@ const getById = async (req, res, next) => {
   }
 };
 
-const PutSales = async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const [data] = req.body;
     const { id } = req.params;
@@ -42,10 +42,10 @@ const PutSales = async (req, res, next) => {
   }
 };
 
-const DeleteSale = async (req, res, next) => {
+const exclude = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { code, data } = await salesService.deleteOne(id);
+    const { code, data } = await salesService.exclude(id);
     return res.status(code).json(data);
   } catch (error) {
     next(error);
@@ -53,9 +53,9 @@ const DeleteSale = async (req, res, next) => {
 };
 
 module.exports = {
-  PostSales,
+  create,
   getAll,
   getById,
-  PutSales,
-  DeleteSale,
+  update,
+  exclude,
 };

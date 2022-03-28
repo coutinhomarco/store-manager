@@ -117,21 +117,21 @@ describe('Testa controller de sales', () => {
       const serviceResponse =  { code: 201,  data: { id: 1, itemsSold: [{productId: 1, quantity: 300 }]}}
       beforeEach(() => {
         request.params = [{ "productId": 1, "quantity": 3 }];
-        sinon.stub(salesServices, 'postSales').resolves(serviceResponse);
+        sinon.stub(salesServices, 'create').resolves(serviceResponse);
       })
 
         afterEach(() => {
-          salesServices.postSales.restore()
+          salesServices.create.restore()
         })
 
         it('Chama o response.status com o valor da propriedade "code" do serviceResponse', async () =>{
-          await salesControllers.PostSales(request, response, next)
+          await salesControllers.create(request, response, next)
   
           expect(response.status.calledWith(serviceResponse.code));
         })
   
         it('Chama o response.json com o valor da propriedade "data" do serviceResponse ', async () =>{
-          await salesControllers.PostSales(request, response, next)
+          await salesControllers.create(request, response, next)
   
           expect(response.json.calledWith(serviceResponse.data));
         })
@@ -140,21 +140,21 @@ describe('Testa controller de sales', () => {
         const serviceResponse =  { code: 422,  message: 'Such amount is not permitted to sell'}
         beforeEach(() => {
           request.params = [{ "productId": 1, "quantity": 300 }];
-          sinon.stub(salesServices, 'postSales').resolves(serviceResponse);
+          sinon.stub(salesServices, 'create').resolves(serviceResponse);
         })
   
           afterEach(() => {
-            salesServices.postSales.restore()
+            salesServices.create.restore()
           })
   
           it('Chama o response.status com o valor da propriedade "code" do serviceResponse', async () =>{
-            await salesControllers.PostSales(request, response, next)
+            await salesControllers.create(request, response, next)
     
             expect(response.status.calledWith(serviceResponse.code));
           })
     
           it('Chama o response.json com o valor da propriedade "data" do serviceResponse ', async () =>{
-            await salesControllers.PostSales(request, response, next)
+            await salesControllers.create(request, response, next)
     
             expect(response.json.calledWith({message: serviceResponse.message}));
           })
