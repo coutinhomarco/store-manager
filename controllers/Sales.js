@@ -1,13 +1,12 @@
-const salesModel = require('../models/SalesModel');
-const middlewares = require('../middlewares');
+const { serialize } = require('../middlewares');
 const modifySale = require('../middlewares/modifySale');
-// const { serialize } = require('../middlewares/serialize');
+const salesService = require('../services/sales.service');
 
 const PostSales = async (req, res, next) => {
   try {
     const sales = req.body;
-    const returnValue = await middlewares.PostSales(sales);
-    return res.status(201).json(returnValue);
+    const { code, data } = await salesService.postSales(sales);
+    return res.status(code).json(data);
   } catch (error) {
     next(error);
   }
@@ -15,8 +14,8 @@ const PostSales = async (req, res, next) => {
 
 const getAll = async (_req, res, next) => {
   try {
-    const sales = await salesModel.getAll();
-    return res.status(200).json(middlewares.serialize(sales));
+    const { code, data } = await salesService.getAll();
+    return res.status(code).json(serialize(data));
   } catch (error) {
     next(error);
   }
@@ -25,9 +24,8 @@ const getAll = async (_req, res, next) => {
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const sale = await salesModel.getById(id);
-    if (sale.length < 1) return res.status(404).json({ message: 'Sale not found' });
-    return res.status(200).json(middlewares.serialize(sale));
+    const { code, data } = await salesService.getById(id);
+    return res.status(code).json(serialize(data));
   } catch (error) {
     next(error);
   }
