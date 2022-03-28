@@ -1,5 +1,5 @@
-const { serialize } = require('../middlewares');
-const modifySale = require('../middlewares/modifySale');
+const serialize = require('../helpers/serialize');
+const modifySale = require('../helpers/modifySale');
 const salesService = require('../services/sales.service');
 
 const PostSales = async (req, res, next) => {
@@ -42,9 +42,20 @@ const PutSales = async (req, res, next) => {
   }
 };
 
+const DeleteSale = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { code, data } = await salesService.deleteOne(id);
+    return res.status(code).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   PostSales,
   getAll,
   getById,
   PutSales,
+  DeleteSale,
 };
